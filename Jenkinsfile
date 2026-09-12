@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'Maven-3.9'
-      jdk 'JDK-17'
+        jdk 'JDK-17'
     }
     stages {
         stage('Checkout') {
@@ -14,6 +14,11 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Lint') {
+            steps {
+                bat 'mvn checkstyle:check'
             }
         }
         stage('Tests Unitaires') {
